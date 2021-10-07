@@ -1,0 +1,74 @@
+type: edu
+custom_name: stage1
+files:
+- name: src/bot/SimpleBot.kt
+  visible: true
+  text: |
+    package bot
+
+    fun main() {
+        // write your code here
+    }
+  learner_created: false
+- name: test/ChattyBotTest.java
+  visible: false
+  text: |
+    import org.hyperskill.hstest.stage.StageTest;
+    import org.hyperskill.hstest.testcase.CheckResult;
+    import org.hyperskill.hstest.testcase.TestCase;
+
+    import java.util.Collections;
+    import java.util.List;
+
+
+    public class ChattyBotTest extends StageTest<Object> {
+
+        @Override
+        public List<TestCase<Object>> generate() {
+            return Collections.singletonList(
+                new TestCase<>()
+            );
+        }
+
+        @Override
+        public CheckResult check(String reply, Object clue) {
+
+            String[] lines = reply.trim().split("\n");
+
+            if (lines.length != 2) {
+                return CheckResult.wrong(
+                    "You should output exactly 2 lines!\n" +
+                    "Lines found: " + lines.length
+                );
+            }
+
+            String secondLine = lines[1];
+
+            if (!secondLine.matches(".*\\d.*")) {
+                return CheckResult.wrong(
+                    "The second line should contain a year!\n" +
+                    "Your second line: \"" + secondLine + "\""
+                );
+            }
+
+            return CheckResult.correct();
+        }
+    }
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/126/stages/668/implement#comment
+status: Failed
+feedback:
+  message: |-
+    Error in test #1
+
+    Program ran out of input. You tried to read more than expected.
+
+    Please find below the output of your program during this failed test.
+
+    ---
+
+    Hello! My name is Aid.
+    I was created in 2020.
+    Please, remind me your name.
+  time: Thu, 07 Oct 2021 12:29:19 UTC
+record: 1
